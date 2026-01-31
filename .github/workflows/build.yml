@@ -51,10 +51,6 @@ jobs:
 
       - uses: Swatinem/rust-cache@v2
 
-      - name: Remove openssl for Windows
-        run: cargo remove openssl
-        if: ${{ matrix.target.os == 'windows' }}
-
       - name: Build using cross
         run: cross build --release --target ${{ matrix.target.rust-target }}
         if: ${{ matrix.target.os != 'windows' && matrix.target.os != 'darwin' }}
@@ -70,11 +66,11 @@ jobs:
 
       - name: Set executable filename
         id: set_filename
-        run: echo "filename=Five_In_A_Row_Backend-${{ matrix.target.os }}-${{ matrix.target.arch }}${{ steps.set_extension.outputs.extension }}" >> $GITHUB_OUTPUT
+        run: echo "filename=server-${{ matrix.target.os }}-${{ matrix.target.arch }}${{ steps.set_extension.outputs.extension }}" >> $GITHUB_OUTPUT
 
       - uses: actions/upload-artifact@v4
         with:
           if-no-files-found: error
           name: ${{ steps.set_filename.outputs.filename }}
-          path: target/${{ matrix.target.rust-target }}/release/Five_In_A_Row_Backend${{ steps.set_extension.outputs.extension }}
+          path: target/${{ matrix.target.rust-target }}/release/server${{ steps.set_extension.outputs.extension }}
           compression-level: 0
