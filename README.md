@@ -1,4 +1,4 @@
-# Five-In-A-Row Server (axum + PostgreSQL)
+# Five-In-A-Row Server (Axum + PostgreSQL)
 
 ## Prereqs
 
